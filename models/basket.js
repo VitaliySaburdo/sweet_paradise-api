@@ -1,14 +1,16 @@
 const { Schema, model } = require("mongoose");
 
 const basketSchema = new Schema({
-  id: {
-    type: Number,
+  userId: {
+    type: String,
+    require: true,
+    ref: "user",
   },
 });
 
 const basketDeviseSchema = new Schema({
-  id: {
-    type: Number,
+  userId: {
+    type: String,
   },
 });
 
