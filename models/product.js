@@ -26,27 +26,44 @@ const productSchema = new Schema(
   { versionKey: false }
 );
 
+const categorySchema = new Schema({
+  id: { type: String, required: true },
+  name: { type: String, required: true },
+});
+
 productSchema.post("save", handleMongooseError);
+categorySchema.post("save", handleMongooseError);
 
 const Product = model("product", productSchema);
+const Category = model("category", categorySchema);
 
 // Joi schemas
-const addSchema = Joi.object({
+const addProductSchema = Joi.object({
+  name: Joi.string().required(),
+  price: Joi.string().required(),
+  category_id: Joi.number().required(),
+  img: Joi.string().required(),
+});
+const changeProductSchema = Joi.object({
   name: Joi.string().required(),
   price: Joi.string().required(),
   category_id: Joi.string().required(),
   img: Joi.string().required(),
 });
-const changeSchema = Joi.object({
+const addCategorySchemas = Joi.object({
+  category_id: Joi.number().required(),
   name: Joi.string().required(),
-  price: Joi.string().required(),
-  category_id: Joi.string().required(),
-  img: Joi.string().required(),
+});
+const changeCategorySchemas = Joi.object({
+  category_id: Joi.number().required(),
+  name: Joi.string().required(),
 });
 
 const schemas = {
-  addSchema: addSchema,
-  changeSchema: changeSchema,
+  addProductSchema: addProductSchema,
+  changeProductSchema: changeProductSchema,
+  addCategorySchemas: addCategorySchemas,
+  changeCategorySchemas: changeCategorySchemas,
 };
 
-module.exports = { Product, schemas };
+module.exports = { Product, Category, schemas };
