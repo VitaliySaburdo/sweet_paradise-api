@@ -21,12 +21,6 @@ const userSchema = new Schema(
       minlength: 6,
       required: [true, "Password is required"],
     },
-    role: {
-      type: String,
-      enum: ["admin", "user"],
-      default: "user",
-      required: [true, "Role is required"],
-    },
     token: {
       type: String,
       default: "",
