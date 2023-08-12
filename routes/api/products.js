@@ -5,7 +5,6 @@ const router = express.Router();
 const ctrl = require("../../controllers/products");
 
 const {
-  validateCreateBody,
   isValidId,
   authenticate,
 } = require("../../middlewares");
@@ -17,12 +16,12 @@ router.get("/:id", authenticate, isValidId, ctrl.getProductsById);
 router.post(
   "/",
   authenticate,
-  ctrl.createContact
+  ctrl.createProduct
 );
 
-router.delete("/:id", authenticate, isValidId, ctrl.deleteContact);
+router.delete("/:id", authenticate, isValidId, ctrl.deleteProduct);
 
-router.put("/:id", authenticate, isValidId, ctrl.changeContactById);
+router.put("/:id", authenticate, isValidId, ctrl.changeProductById);
 
 module.exports = router;
 

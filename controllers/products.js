@@ -31,13 +31,13 @@ const getProductsById = async (req, res) => {
   res.json(result);
 };
 
-const createContact = async (req, res) => {
+const createProduct = async (req, res) => {
   const { _id: owner } = req.user;
   const result = await Products.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 
-const deleteContact = async (req, res) => {
+const deleteProduct = async (req, res) => {
   const { id } = req.params;
   const result = await Products.findByIdAndDelete(id);
   if (!result) {
@@ -46,7 +46,7 @@ const deleteContact = async (req, res) => {
   res.status(200).json({ message: "contact deleted" });
 };
 
-const changeContactById = async (req, res) => {
+const changeProductById = async (req, res) => {
   const { id } = req.params;
   const result = await Products.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
@@ -60,8 +60,8 @@ const changeContactById = async (req, res) => {
 module.exports = {
   getAllProducts: ctrlWrapper(getAllProducts),
   getProductsById: ctrlWrapper(getProductsById),
-  createContact: ctrlWrapper(createContact),
-  deleteContact: ctrlWrapper(deleteContact),
-  changeContactById: ctrlWrapper(changeContactById),
+  createProduct: ctrlWrapper(createProduct),
+  deleteProduct: ctrlWrapper(deleteProduct),
+  changeProductById: ctrlWrapper(changeProductById),
 
 };
