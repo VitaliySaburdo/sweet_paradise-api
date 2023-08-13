@@ -1,4 +1,4 @@
-const { Products } = require("../models/product");
+const { Product } = require("../models/product");
 
 const { HttpError, ctrlWrapper } = require("../helpers");
 
@@ -9,13 +9,13 @@ const getAllProducts = async (req, res) => {
   const favorite = req.query.favorite;
   const skip = page * limit;
   if (favorite) {
-    const result = await Products.find({ owner, favorite }, "", {
+    const result = await Product.find({ owner, favorite }, "", {
       skip,
       limit,
     }).populate("owner", "name email");
     res.json(result);
   }
-  const result = await Products.find({ owner }, "", {
+  const result = await Product.find({ owner }, "", {
     skip,
     limit,
   }).populate("owner", "name email");
@@ -24,7 +24,7 @@ const getAllProducts = async (req, res) => {
 
 const getProductsById = async (req, res) => {
   const { id } = req.params;
-  const result = await Products.findOne({ _id: id });
+  const result = await Product.findOne({ _id: id });
   if (!result) {
     throw HttpError(404, `Product with id ${id} not found`);
   }
@@ -32,16 +32,15 @@ const getProductsById = async (req, res) => {
 };
 
 const createProduct = async (req, res) => {
-  console.log(req.user);
-  console.log(owner);
   const { _id: owner } = req.user;
-  const result = await Products.create({ ...req.body, owner });
+  const result = await Product.create({ ...req.body, owner });
+  console.log(result);
   res.status(201).json(result);
 };
 
 const deleteProduct = async (req, res) => {
   const { id } = req.params;
-  const result = await Products.findByIdAndDelete(id);
+  const result = await Product.findByIdAndDelete(id);
   if (!result) {
     throw HttpError(404, "Not Found");
   }
@@ -50,7 +49,7 @@ const deleteProduct = async (req, res) => {
 
 const changeProductById = async (req, res) => {
   const { id } = req.params;
-  const result = await Products.findByIdAndUpdate(id, req.body, { new: true });
+  const result = await Product.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
     throw HttpError(404, `Product with id ${id} not found`);
   }

@@ -22,7 +22,12 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
-         favorite: {
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
+    favorite: {
       type: Boolean,
       default: false,
     },
