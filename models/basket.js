@@ -1,11 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const basketSchema = new Schema({
-  userId: {
-    type: String,
-    require: true,
-    ref: "user",
-  },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: "user",
+      required: true,
+    },
 });
 
 const basketDeviseSchema = new Schema({
@@ -18,3 +18,4 @@ const Basket = model("Basket", basketSchema);
 const BasketDevise = model("BasketDevise", basketDeviseSchema);
 
 module.exports = { Basket, BasketDevise };
+
