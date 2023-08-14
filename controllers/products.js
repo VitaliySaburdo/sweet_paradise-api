@@ -34,7 +34,6 @@ const getProductsById = async (req, res) => {
 const createProduct = async (req, res) => {
   const { _id: owner } = req.user;
   const result = await Product.create({ ...req.body, owner });
-  console.log(result);
   res.status(201).json(result);
 };
 
