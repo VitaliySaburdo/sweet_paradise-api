@@ -35,16 +35,9 @@ const productSchema = new Schema(
   { versionKey: false }
 );
 
-const categorySchema = new Schema({
-  id: { type: String, required: true },
-  name: { type: String, required: true },
-});
-
 productSchema.post("save", handleMongooseError);
-categorySchema.post("save", handleMongooseError);
 
 const Product = model("product", productSchema);
-const Category = model("category", categorySchema);
 
 // Joi schemas
 const addProductSchema = Joi.object({
@@ -59,20 +52,10 @@ const changeProductSchema = Joi.object({
   category_id: Joi.string().required(),
   img: Joi.string().required(),
 });
-const addCategorySchemas = Joi.object({
-  category_id: Joi.number().required(),
-  name: Joi.string().required(),
-});
-const changeCategorySchemas = Joi.object({
-  category_id: Joi.number().required(),
-  name: Joi.string().required(),
-});
 
 const schemas = {
   addProductSchema: addProductSchema,
   changeProductSchema: changeProductSchema,
-  addCategorySchemas: addCategorySchemas,
-  changeCategorySchemas: changeCategorySchemas,
 };
 
-module.exports = { Product, Category, schemas };
+module.exports = { Product, schemas };
