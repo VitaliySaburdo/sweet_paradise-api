@@ -33,6 +33,11 @@ const getProductsById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   const { _id: owner } = req.user;
+  const { name } = req.body;
+  const product = await Product.findOne({ name });
+  if (product) {
+    throw HttpError(409, `You already have a ${name} product`);
+  }
   const result = await Product.create({ ...req.body, owner });
   res.status(201).json(result);
 };
