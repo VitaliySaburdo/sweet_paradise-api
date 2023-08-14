@@ -6,6 +6,7 @@ const ctrl = require("../../controllers/products");
 
 const {
   isValidId,
+  isAdmin,
   authenticate,
 } = require("../../middlewares");
 
@@ -16,12 +17,13 @@ router.get("/:id", authenticate, isValidId, ctrl.getProductsById);
 router.post(
   "/",
   authenticate,
+  isAdmin,
   ctrl.createProduct
 );
 
-router.delete("/:id", authenticate, isValidId, ctrl.deleteProduct);
+router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteProduct);
 
-router.put("/:id", authenticate, isValidId, ctrl.changeProductById);
+router.put("/:id", authenticate, isValidId, isAdmin, ctrl.changeProductById);
 
 module.exports = router;
 
