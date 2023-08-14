@@ -22,7 +22,6 @@ const register = async (req, res) => {
   const payload = {
     id: newUser._id,
   };
-  console.log(payload);
 
   const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
   await User.findByIdAndUpdate(newUser._id, { token });
@@ -73,8 +72,6 @@ const logout = async (req, res) => {
   await User.findByIdAndUpdate(_id, { token: "" });
   res.status(204).json({ message: "Logout success" });
 };
-
-
 
 module.exports = {
   register: ctrlWrapper(register),
