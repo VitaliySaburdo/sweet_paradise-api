@@ -3,7 +3,7 @@ const Joi = require("joi");
 const { handleMongooseError } = require("../helpers");
 
 const categorySchema = new Schema({
-  id: { type: String, required: true },
+  category_id: { type: String, required: true },
   name: { type: String, required: true },
 });
 
