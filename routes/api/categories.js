@@ -8,12 +8,12 @@ const { isValidId, isAdmin, authenticate } = require("../../middlewares");
 
 router.post("/", authenticate, isAdmin, ctrl.createCategory);
 
-// router.get("/", authenticate, ctrl.getAllProducts);
+router.get("/", authenticate, ctrl.getCategories);
 
-// router.get("/:id", authenticate, isValidId, ctrl.getProductsById);
+router.get("/:id", authenticate, isValidId, ctrl.getCategoryById);
 
-// router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteProduct);
+router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteCategory);
 
-// router.put("/:id", authenticate, isValidId, isAdmin, ctrl.changeProductById);
+router.put("/:id", authenticate, isValidId, isAdmin, ctrl.changeCategoryById);
 
 module.exports = router;

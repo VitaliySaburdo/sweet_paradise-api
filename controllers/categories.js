@@ -18,37 +18,37 @@ const getCategories = async (req, res) => {
   res.json(result);
 };
 
-const getProductsById = async (req, res) => {
+const getCategoryById = async (req, res) => {
   const { id } = req.params;
-  const result = await Product.findOne({ _id: id });
+  const result = await Category.findOne({ _id: id });
   if (!result) {
-    throw HttpError(404, `Product with id ${id} not found`);
+    throw HttpError(404, `Category with id ${id} not found`);
   }
   res.json(result);
 };
 
-const deleteProduct = async (req, res) => {
+const deleteCategory = async (req, res) => {
   const { id } = req.params;
-  const result = await Product.findByIdAndDelete(id);
+  const result = await Category.findByIdAndDelete(id);
   if (!result) {
     throw HttpError(404, "Not Found");
   }
-  res.status(200).json({ message: "contact deleted" });
+  res.status(200).json({ message: `Category ${result} deleted` });
 };
 
-const changeProductById = async (req, res) => {
+const changeCategoryById = async (req, res) => {
   const { id } = req.params;
-  const result = await Product.findByIdAndUpdate(id, req.body, { new: true });
+  const result = await Category.findByIdAndUpdate(id, req.body, { new: true });
   if (!result) {
-    throw HttpError(404, `Product with id ${id} not found`);
+    throw HttpError(404, `Category with id ${id} not found`);
   }
   res.status(200).json(result);
 };
 
 module.exports = {
   createCategory: ctrlWrapper(createCategory),
-  //   getAllProducts: ctrlWrapper(getAllProducts),
-  //   getProductsById: ctrlWrapper(getProductsById),
-  //   deleteProduct: ctrlWrapper(deleteProduct),
-  //   changeProductById: ctrlWrapper(changeProductById),
+    getCategories: ctrlWrapper(getCategories),
+    getCategoryById: ctrlWrapper(getCategoryById),
+    deleteCategory: ctrlWrapper(deleteCategory),
+    changeCategoryById: ctrlWrapper(changeCategoryById),
 };
