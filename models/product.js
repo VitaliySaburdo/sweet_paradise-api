@@ -26,6 +26,10 @@ const productSchema = new Schema(
       type: String,
       required: true,
     },
+    ingredients: {
+      type: String,
+      required: true,
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -50,6 +54,7 @@ const addProductSchema = Joi.object({
   weight: Joi.string().required(),
   category_id: Joi.number().required(),
   img: Joi.string().required(),
+  ingredients: Joi.string().required(),
 });
 const changeProductSchema = Joi.object({
   name: Joi.string().required(),
@@ -57,6 +62,7 @@ const changeProductSchema = Joi.object({
   weight: Joi.string().required(),
   category_id: Joi.string().required(),
   img: Joi.string().required(),
+  ingredients: Joi.string().required(),
 });
 
 const schemas = {
