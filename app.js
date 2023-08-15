@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 require("dotenv").config();
 const authRouter = require("./routes/api/auth");
 const productsRouter = require("./routes/api/products");
+const categoriesRouter = require("./routes/api/categories");
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(fileUpload({}));
 
 app.use("/users", authRouter);
+app.use("/categories", categoriesRouter);
 app.use("/products", productsRouter);
 
 app.use((req, res) => {
