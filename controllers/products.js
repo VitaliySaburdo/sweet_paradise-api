@@ -1,4 +1,6 @@
+const uuid = require("uuid");
 const { Product } = require("../models/product");
+const path = require("path");
 
 const { HttpError, ctrlWrapper } = require("../helpers");
 
@@ -38,7 +40,10 @@ const createProduct = async (req, res) => {
   if (product) {
     throw HttpError(409, `You already have a ${name} product`);
   }
-  const result = await Product.create({ ...req.body, owner });
+  const { img } = req.file;
+  let fileName = uuid.v4() + ".jpeg";
+  img.mv(path.resolve(__dirname, "..", "static", fileName));
+  const result = await Product.create({ ...req.body, img, owner });
   res.status(201).json(result);
 };
 
@@ -60,13 +65,10 @@ const changeProductById = async (req, res) => {
   res.status(200).json(result);
 };
 
-
-
 module.exports = {
   getAllProducts: ctrlWrapper(getAllProducts),
   getProductsById: ctrlWrapper(getProductsById),
   createProduct: ctrlWrapper(createProduct),
   deleteProduct: ctrlWrapper(deleteProduct),
   changeProductById: ctrlWrapper(changeProductById),
-
 };
