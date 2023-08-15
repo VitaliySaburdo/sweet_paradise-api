@@ -14,6 +14,10 @@ const productSchema = new Schema(
       type: Number,
       required: true,
     },
+    weight: {
+      type: String,
+      required: true,
+    },
     category_id: {
       type: Number,
       required: true,
@@ -43,12 +47,14 @@ const Product = model("product", productSchema);
 const addProductSchema = Joi.object({
   name: Joi.string().required(),
   price: Joi.string().required(),
+  weight: Joi.string().required(),
   category_id: Joi.number().required(),
   img: Joi.string().required(),
 });
 const changeProductSchema = Joi.object({
   name: Joi.string().required(),
   price: Joi.string().required(),
+  weight: Joi.string().required(),
   category_id: Joi.string().required(),
   img: Joi.string().required(),
 });
