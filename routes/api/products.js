@@ -4,10 +4,13 @@ const router = express.Router();
 
 const ctrl = require("../../controllers/products");
 
+const { schemas } = require("../../models/product");
+
 const {
   isValidId,
   isAdmin,
   authenticate,
+  validatePatchBody
 } = require("../../middlewares");
 
 router.get("/", authenticate, ctrl.getAllProducts);
@@ -24,6 +27,13 @@ router.post(
 router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteProduct);
 
 router.put("/:id", authenticate, isValidId, isAdmin, ctrl.changeProductById);
+
+router.patch(
+  "/:id/favorite",
+  isValidId,
+  validatePatchBody(schemas.upDateFavoriteSchema),
+  ctrl.upDateFavorite
+);
 
 module.exports = router;
 

@@ -66,9 +66,14 @@ const changeProductSchema = Joi.object({
   ingredients: Joi.string().required(),
 });
 
+const upDateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
 const schemas = {
   addProductSchema: addProductSchema,
   changeProductSchema: changeProductSchema,
+  upDateFavoriteSchema: upDateFavoriteSchema,
 };
 
 module.exports = { Product, schemas };

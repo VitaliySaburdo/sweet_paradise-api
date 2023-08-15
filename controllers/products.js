@@ -65,10 +65,20 @@ const changeProductById = async (req, res) => {
   res.status(200).json(result);
 };
 
+const upDateFavorite = async (req, res) => {
+  const { id } = req.params;
+  const result = await Product.findByIdAndUpdate(id, req.body, { new: true });
+  if (!result) {
+    throw HttpError(404, `Product with id ${id} not found`);
+  }
+  res.status(200).json(result);
+};
+
 module.exports = {
   getAllProducts: ctrlWrapper(getAllProducts),
   getProductsById: ctrlWrapper(getProductsById),
   createProduct: ctrlWrapper(createProduct),
   deleteProduct: ctrlWrapper(deleteProduct),
   changeProductById: ctrlWrapper(changeProductById),
+  upDateFavorite: ctrlWrapper(upDateFavorite),
 };
