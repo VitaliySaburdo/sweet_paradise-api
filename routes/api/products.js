@@ -10,19 +10,14 @@ const {
   isValidId,
   isAdmin,
   authenticate,
-  validatePatchBody
+  validatePatchBody,
 } = require("../../middlewares");
 
-router.get("/", authenticate, ctrl.getAllProducts);
+router.get("/", ctrl.getAllProducts);
 
-router.get("/:id", authenticate, isValidId, ctrl.getProductsById);
+// router.get("/:id", isValidId, ctrl.getProductsById);
 
-router.post(
-  "/",
-  authenticate,
-  isAdmin,
-  ctrl.createProduct
-);
+router.post("/", authenticate, isAdmin, ctrl.createProduct);
 
 router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteProduct);
 

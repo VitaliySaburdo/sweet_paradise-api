@@ -5,19 +5,19 @@ const path = require("path");
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAllProducts = async (req, res) => {
-  const { _id: owner } = req.user;
   const page = parseInt(req.query.page) - 1 || 0;
   const limit = parseInt(req.query.limit) || 20;
   const favorite = req.query.favorite;
   const skip = page * limit;
   if (favorite) {
+    const { _id: owner } = req.user;
     const result = await Product.find({ owner, favorite }, "", {
       skip,
       limit,
     }).populate("owner", "name email");
     res.json(result);
   }
-  const result = await Product.find({ owner }, "", {
+  const result = await Product.find({}, "", {
     skip,
     limit,
   }).populate("owner", "name email");
