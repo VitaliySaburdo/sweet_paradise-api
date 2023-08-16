@@ -8,7 +8,7 @@ const { isValidId, isAdmin, authenticate } = require("../../middlewares");
 
 router.post("/", authenticate, isAdmin, ctrl.createCategory);
 
-router.get("/", authenticate, ctrl.getCategories);
+router.get("/", ctrl.getCategories);
 
 router.get("/:id", authenticate, isValidId, ctrl.getCategoryById);
 

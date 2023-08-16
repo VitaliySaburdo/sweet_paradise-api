@@ -6,7 +6,7 @@ const { HttpError, ctrlWrapper } = require("../helpers");
 
 const getAllProducts = async (req, res) => {
   const page = parseInt(req.query.page) - 1 || 0;
-  const limit = parseInt(req.query.limit) || 20;
+  const limit = parseInt(req.query.limit) || 6;
   const favorite = req.query.favorite;
   const skip = page * limit;
   if (favorite) {
