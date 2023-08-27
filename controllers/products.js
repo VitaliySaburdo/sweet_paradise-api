@@ -24,6 +24,16 @@ const getAllProducts = async (req, res) => {
   res.json(result);
 };
 
+export const getProductsByCategories = async (req, res) => {
+  const categoryID = req.params.id; 
+
+  const result = await Product.find({ category: categoryID });
+    if (!result) {
+    throw HttpError(404, `Product with id ${id} not found`);
+  }
+  res.json(result);
+};
+
 const getProductsById = async (req, res) => {
   const { id } = req.params;
   const result = await Product.findOne({ _id: id });
@@ -76,6 +86,7 @@ const upDateFavorite = async (req, res) => {
 
 module.exports = {
   getAllProducts: ctrlWrapper(getAllProducts),
+  getProductsByCategories: ctrlWrapper(getProductsByCategories),
   getProductsById: ctrlWrapper(getProductsById),
   createProduct: ctrlWrapper(createProduct),
   deleteProduct: ctrlWrapper(deleteProduct),
