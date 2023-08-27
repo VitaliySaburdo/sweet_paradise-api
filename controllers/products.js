@@ -24,12 +24,12 @@ const getAllProducts = async (req, res) => {
   res.json(result);
 };
 
-export const getProductsByCategories = async (req, res) => {
+ const getProductsByCategories = async (req, res) => {
   const categoryID = req.params.id; 
 
   const result = await Product.find({ category: categoryID });
     if (!result) {
-    throw HttpError(404, `Product with id ${id} not found`);
+    throw HttpError(404, `Category with id ${id} not found`);
   }
   res.json(result);
 };
