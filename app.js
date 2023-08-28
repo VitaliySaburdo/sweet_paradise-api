@@ -20,6 +20,7 @@ app.use(fileUpload({}));
 app.use("/users", authRouter);
 app.use("/categories", categoriesRouter);
 app.use("/products", productsRouter);
+app.use("/static", express.static(__dirname + "/static"));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
