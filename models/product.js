@@ -42,6 +42,7 @@ const productSchema = new Schema(
     },
     quantity: {
       type: Number,
+      default: 0,
     },
   },
   { versionKey: false }
