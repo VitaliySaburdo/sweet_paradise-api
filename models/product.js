@@ -40,6 +40,9 @@ const productSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    quantity: {
+      type: Number,
+    },
   },
   { versionKey: false }
 );
