@@ -51,6 +51,8 @@ const createProduct = async (req, res) => {
     throw HttpError(409, `You already have a ${name} product`);
   }
   const { img } = req.files;
+  console.log(img);
+  
   let fileName = uuid.v4() + ".jpeg";
   img.mv(path.resolve(__dirname, "..", "static", fileName));
   const result = await Product.create({ ...req.body, img: fileName, owner });

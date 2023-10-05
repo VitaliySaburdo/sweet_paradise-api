@@ -11,6 +11,7 @@ const {
   isAdmin,
   authenticate,
   validatePatchBody,
+  upload,
 } = require("../../middlewares");
 
 router.get("/", ctrl.getAllProducts);

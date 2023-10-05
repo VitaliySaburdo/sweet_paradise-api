@@ -3,7 +3,7 @@ const authenticate = require("./authenticate");
 const isValidId = require("./isValidId");
 const isAdmin = require("./isAdmin");
 const validatePatchBody = require("./validatePatchBody");
-const upload = require("./uploadImg");
+const upload = require("./upload");
 
 module.exports = {
   validateBody,
