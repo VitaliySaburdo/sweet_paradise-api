@@ -10,7 +10,6 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-
   params: {
     folder: "images",
     allowedFormats: ["jpg", "png"],
