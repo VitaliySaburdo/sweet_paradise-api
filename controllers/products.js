@@ -24,11 +24,11 @@ const getAllProducts = async (req, res) => {
   res.json(result);
 };
 
- const getProductsByCategories = async (req, res) => {
-  const categoryID = req.params.id; 
+const getProductsByCategories = async (req, res) => {
+  const categoryID = req.params.id;
 
   const result = await Product.find({ category: categoryID });
-    if (!result) {
+  if (!result) {
     throw HttpError(404, `Category with id ${id} not found`);
   }
   res.json(result);
@@ -52,7 +52,12 @@ const createProduct = async (req, res) => {
   }
   const { img } = req.files;
   let fileName = uuid.v4() + ".jpeg";
-  img.mv(path.resolve(__dirname, "..", "static", fileName));
+  const uploadPath = path.join(
+    __dirname,
+    `https://sweet-paradise-api.onrender.com/static/${fileName}`,
+    fileName
+  );
+  img.mv(path.resolve(uploadPath));
   const result = await Product.create({ ...req.body, img: fileName, owner });
   res.status(201).json(result);
 };
