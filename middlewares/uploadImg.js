@@ -9,13 +9,13 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
+  cloudinary,
   params: {
     folder: "images",
     allowedFormats: ["jpg", "png"],
   },
 });
 
-const parser = multer({ storage: storage });
+const upload = multer({ storage });
 
-module.exports = parser;
+module.exports = upload;

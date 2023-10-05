@@ -4,8 +4,6 @@ const router = express.Router();
 
 const ctrl = require("../../controllers/products");
 
-const { parser } = require("../../middlewares/uploadImg");
-
 const { schemas } = require("../../models/product");
 
 const {
@@ -21,13 +19,7 @@ router.get("/category/:id", ctrl.getProductsByCategories);
 
 // router.get("/:id", isValidId, ctrl.getProductsById);
 
-router.post(
-  "/",
-  authenticate,
-  parser.single("file"),
-  isAdmin,
-  ctrl.createProduct
-);
+router.post("/", authenticate, isAdmin, ctrl.createProduct);
 
 router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteProduct);
 

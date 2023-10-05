@@ -50,18 +50,10 @@ const createProduct = async (req, res) => {
   if (product) {
     throw HttpError(409, `You already have a ${name} product`);
   }
-  if (!req.file) {
-    throw HttpError(409, `No image uploaded`);
-  }
-  // let fileName = uuid.v4() + ".jpeg";
-  // const uploadPath = path.join(__dirname, "../static", fileName);
-
-  // img.mv(uploadPath);
-  const result = await Product.create({
-    ...req.body,
-    img: req.file.path,
-    owner,
-  });
+  const { img } = req.files;
+  let fileName = uuid.v4() + ".jpeg";
+  img.mv(path.resolve(__dirname, "..", "static", fileName));
+  const result = await Product.create({ ...req.body, img: fileName, owner });
   res.status(201).json(result);
 };
 
