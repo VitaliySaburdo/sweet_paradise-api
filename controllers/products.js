@@ -52,12 +52,14 @@ const createProduct = async (req, res) => {
   }
   const { img } = req.files;
   let fileName = uuid.v4() + ".jpeg";
-  const uploadPath = path.join(
-    __dirname,
-    `https://sweet-paradise-api.onrender.com/static/${fileName}`,
-    fileName
+  img.mv(
+    path.resolve(
+      __dirname,
+      "..",
+      "https://sweet-paradise-api.onrender.com/static/",
+      fileName
+    )
   );
-  img.mv(path.resolve(uploadPath));
   const result = await Product.create({ ...req.body, img: fileName, owner });
   res.status(201).json(result);
 };
