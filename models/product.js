@@ -24,7 +24,7 @@ const productSchema = new Schema(
       required: true,
     },
     img: {
-      type: String,
+      type: Number,
       required: true,
     },
     ingredients: {
