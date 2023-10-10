@@ -15,7 +15,7 @@ const productSchema = new Schema(
       required: true,
     },
     weight: {
-      type: String,
+      type: Number,
       required: true,
     },
     category: {
@@ -24,7 +24,7 @@ const productSchema = new Schema(
       required: true,
     },
     img: {
-      type: Number,
+      type: String,
       required: true,
     },
     ingredients: {
