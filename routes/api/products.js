@@ -20,7 +20,7 @@ router.get("/category/:id", ctrl.getProductsByCategories);
 
 // router.get("/:id", isValidId, ctrl.getProductsById);
 
-router.post("/", authenticate, ctrl.createProduct);
+router.post("/", authenticate, isAdmin, ctrl.createProduct);
 
 router.delete("/:id", authenticate, isValidId, isAdmin, ctrl.deleteProduct);
 
