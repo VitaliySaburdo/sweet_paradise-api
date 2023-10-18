@@ -4,7 +4,14 @@ const { handleMongooseError } = require("../helpers");
 
 const categorySchema = new Schema(
   {
-    name: { type: String, required: true },
+    name: {
+      type: String,
+      required: true
+    },
+    img: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false }
 );
@@ -15,6 +22,7 @@ const Category = model("category", categorySchema);
 
 const addCategorySchemas = Joi.object({
   name: Joi.string().required(),
+  img: Joi.string().required(),
 });
 const changeCategorySchemas = Joi.object({
   name: Joi.string().required(),

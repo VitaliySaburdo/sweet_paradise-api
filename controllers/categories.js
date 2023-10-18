@@ -9,7 +9,10 @@ const createCategory = async (req, res) => {
   if (category) {
     throw HttpError(409, `You already have a category ${category}`);
   }
-  const result = await Category.create({ ...req.body, owner });
+  const { img } = req.files;
+  let fileName = uuid.v4() + ".png";
+  img.mv(path.resolve(__dirname, "..", "static", fileName));
+  const result = await Category.create({ ...req.body,  img: fileName, owner });
   res.status(201).json(result);
 };
 
