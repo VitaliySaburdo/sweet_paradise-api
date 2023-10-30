@@ -1,4 +1,5 @@
 const { Schema, model } = require("mongoose");
+const Joi = require("joi");
 
 const orderItemSchema = new Schema({
   _id: Schema.Types.ObjectId,
@@ -52,4 +53,27 @@ const orderSchema = new Schema({
 
 const Orders = model("orders", orderSchema);
 
-module.exports = { Orders };
+const addOrderSchema = Joi.object({
+  owner: Joi.string().required(),
+  items: Joi.array()
+    .items(
+      Joi.object({
+        name: Joi.string().required(),
+        price: Joi.number().required(),
+        category: Joi.string().required(),
+        favorite: Joi.boolean().default(false),
+        img: Joi.string().required(),
+        ingredients: Joi.string().required(),
+        quantity: Joi.number().required(),
+        totalPrice: Joi.number().required(),
+        weight: Joi.number().required(),
+      })
+    )
+    .required(),
+});
+
+const schemas = {
+  addOrderSchema,
+};
+
+module.exports = { Orders, schemas };
