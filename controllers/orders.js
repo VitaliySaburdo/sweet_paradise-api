@@ -1,6 +1,3 @@
-const { Orders } = require("../models/orders");
-("../static");
-
 const { HttpError, ctrlWrapper } = require("../helpers");
 
 const createOrders = async (req, res) => {
