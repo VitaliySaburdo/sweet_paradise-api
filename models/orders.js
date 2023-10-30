@@ -50,6 +50,6 @@ const orderSchema = new Schema({
   items: [orderItemSchema],
 });
 
-const Order = model("Order", orderSchema);
+const Orders = model("Orders", orderSchema);
 
-module.exports = { Order };
+module.exports = { Orders };
