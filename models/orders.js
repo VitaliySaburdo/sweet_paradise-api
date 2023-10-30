@@ -44,12 +44,12 @@ const orderItemSchema = new Schema({
 const orderSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: "user",
     required: true,
   },
   items: [orderItemSchema],
 });
 
-const Orders = model("Orders", orderSchema);
+const Orders = model("orders", orderSchema);
 
 module.exports = { Orders };
