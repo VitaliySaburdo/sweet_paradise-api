@@ -7,6 +7,7 @@ require("dotenv").config();
 const authRouter = require("./routes/api/auth");
 const productsRouter = require("./routes/api/products");
 const categoriesRouter = require("./routes/api/categories");
+const ordersRouter = require("./routes/api/orders");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/users", authRouter);
 app.use("/categories", categoriesRouter);
 app.use("/products", productsRouter);
 app.use("/static", express.static(__dirname + "/static"));
+app.use("/orders", ordersRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
