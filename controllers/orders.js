@@ -16,6 +16,13 @@ const createOrders = async (req, res) => {
   res.status(201).json(result);
 };
 
+const getAllOrders = async (req, res) => {
+  const { owner } = req.body;
+  const result = await Orders.find({ owner });
+  res.json(result);
+};
+
 module.exports = {
   createOrders: ctrlWrapper(createOrders),
+  getAllOrders: ctrlWrapper(getAllOrders),
 };
