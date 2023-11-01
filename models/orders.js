@@ -52,6 +52,10 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+    totalPrice: {
+    type: number,
+    required: true,
+  },
   items: [orderItemSchema],
 });
 
@@ -59,6 +63,7 @@ const Orders = model("orders", orderSchema);
 
 const addOrderSchema = Joi.object({
   owner: Joi.string().required(),
+  totalPrice: Joi.number().required(),
   items: Joi.array()
     .items(
       Joi.object({
