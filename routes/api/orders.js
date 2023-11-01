@@ -8,6 +8,6 @@ const ctrl = require("../../controllers/orders");
 
 router.post("/", authenticate, isUser, ctrl.createOrders);
 
-router.get("/", authenticate, isUser, ctrl.getAllOrders);
+router.get("/:id", authenticate, isUser, ctrl.getAllOrders);
 
 module.exports = router;

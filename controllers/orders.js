@@ -17,8 +17,9 @@ const createOrders = async (req, res) => {
 };
 
 const getAllOrders = async (req, res) => {
-  const { owner } = req.body;
-  const result = await Orders.find({ owner });
+  const { id } = req.params;
+  console.log(id);
+  const result = await Orders.find({ owner: id });
   res.json(result);
 };
 
