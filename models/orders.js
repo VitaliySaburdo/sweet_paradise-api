@@ -53,7 +53,7 @@ const orderSchema = new Schema({
     default: Date.now,
   },
     totalPrice: {
-    type: number,
+    type: Number,
     required: true,
   },
   items: [orderItemSchema],
