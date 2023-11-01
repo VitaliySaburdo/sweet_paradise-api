@@ -48,6 +48,10 @@ const orderSchema = new Schema({
     ref: "user",
     required: true,
   },
+  orderTime: {
+    type: Date,
+    default: Date.now,
+  },
   items: [orderItemSchema],
 });
 
