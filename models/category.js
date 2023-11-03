@@ -6,7 +6,7 @@ const categorySchema = new Schema(
   {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     img: {
       type: String,
@@ -22,7 +22,7 @@ const Category = model("category", categorySchema);
 
 const addCategorySchemas = Joi.object({
   name: Joi.string().required(),
-  img: Joi.string().required(),
+  img: Joi.string(),
 });
 const changeCategorySchemas = Joi.object({
   name: Joi.string().required(),
