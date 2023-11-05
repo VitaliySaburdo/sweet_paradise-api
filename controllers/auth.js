@@ -65,7 +65,7 @@ const login = async (req, res) => {
 };
 
 const getCurrent = async (req, res) => {
-  const { email, name } = req.user;
+  const { _id, email, name, role } = req.user;
   res.json({
     _id,
     email,
