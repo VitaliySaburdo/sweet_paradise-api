@@ -18,8 +18,10 @@ const createOrders = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
-  const result = await Orders.find({ owner: id });
+  const page = parseInt(req.query.page) - 1 || 0;
+  const limit = parseInt(req.query.limit) || 6;
+  const skip = page * limit;
+  const result = await Orders.find({ owner: id }, "", {skip, limit});
   res.json(result);
 };
 
