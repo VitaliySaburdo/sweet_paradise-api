@@ -6,7 +6,7 @@ const createOrders = async (req, res) => {
   const { _id: owner } = req.user;
 
   const lastOrder = await Orders.findOne({}, {}, { sort: { orderNumber: -1 } });
-  const orderNumber = lastOrder ? lastOrder.orderNumber + 1 : 1;
+  const orderNumber = lastOrder ? lastOrder.orderNumber - 1 : 1;
 
   const { items } = req.body;
   for (const item of items) {
