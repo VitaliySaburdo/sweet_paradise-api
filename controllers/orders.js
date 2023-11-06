@@ -4,6 +4,10 @@ const { Category } = require("../models/category");
 
 const createOrders = async (req, res) => {
   const { _id: owner } = req.user;
+
+  const lastOrder = await Orders.findOne({}, {}, { sort: { orderNumber: -1 } });
+  const orderNumber = lastOrder ? lastOrder.orderNumber + 1 : 1;
+
   const { items } = req.body;
   for (const item of items) {
     const { category } = item;
@@ -12,7 +16,7 @@ const createOrders = async (req, res) => {
       throw HttpError(401, "Category not found");
     }
   }
-  const result = await Orders.create({ ...req.body, owner });
+  const result = await Orders.create({ ...req.body, owner, orderNumber });
   res.status(201).json(result);
 };
 

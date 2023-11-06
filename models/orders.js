@@ -52,7 +52,10 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-    totalPrice: {
+  orderNumber: {
+    type: Number,
+  },
+  totalPrice: {
     type: Number,
     required: true,
   },
