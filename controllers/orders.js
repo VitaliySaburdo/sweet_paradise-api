@@ -27,17 +27,7 @@ const getAllOrders = async (req, res) => {
   const totalOrders = await Orders.countDocuments({ owner: id });
   const totalPages = Math.ceil(totalOrders / limit);
   const skip = (totalPages - page) * limit;
-
-  let result = await Orders.find({ owner: id }).skip(skip).limit(limit);
-
-  const remainingOrders = limit - result.length;
-  if (remainingOrders > 0 && page === totalPages) {
-    const remainingResult = await Orders.find({ owner: id }).limit(
-      remainingOrders
-    );
-    result = [...remainingResult, ...result];
-  }
-
+  const result = await Orders.find({ owner: id }).skip(skip).limit(limit);
   res.json(result);
 };
 
