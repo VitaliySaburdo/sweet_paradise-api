@@ -24,18 +24,13 @@ const getAllOrders = async (req, res) => {
   const { id } = req.params;
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 6;
-  const totalOrders = await Orders.countDocuments({ owner: id });
-  const totalPages = Math.ceil(totalOrders / limit);
-  let result;
+  const skip = (page - 1) * limit;
 
-  if (page === 1) {
-    result = await Orders.find({ owner: id })
-      .sort({ orderNumber: -1 })
-      .limit(limit);
-  } else {
-    const skip = (totalPages - page) * limit;
-    result = await Orders.find({ owner: id }).skip(skip).limit(limit);
-  }
+  const result = await Orders.find({ owner: id })
+    .sort({ orderNumber: -1 })
+    .limit(limit)
+    .skip(skip);
+
   res.json(result);
 };
 
