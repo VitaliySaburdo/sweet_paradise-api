@@ -22,13 +22,23 @@ const createOrders = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   const { id } = req.params;
-  const limit = parseInt(req.query.limit) || 6;
+  const page = parseInt(req.query.page) || 1;
+  const per_page = parseInt(req.query.limit) || 6;
+
+  const limit = page * per_page;
+
+  const totalOrders = await Orders.countDocuments({ owner: id });
+
+  const totalPages = Math.ceil(totalOrders / per_page);
 
   const result = await Orders.find({ owner: id })
     .sort({ orderNumber: -1 })
     .limit(limit);
 
-  res.json(result);
+  res.json({
+    totalPages,
+    orders: result,
+  });
 };
 
 module.exports = {
