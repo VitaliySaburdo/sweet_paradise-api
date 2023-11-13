@@ -22,14 +22,11 @@ const createOrders = async (req, res) => {
 
 const getAllOrders = async (req, res) => {
   const { id } = req.params;
-  const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 6;
-  const skip = (page - 1) * limit;
 
   const result = await Orders.find({ owner: id })
     .sort({ orderNumber: -1 })
-    .limit(limit)
-    .skip(skip);
+    .limit(limit);
 
   res.json(result);
 };
